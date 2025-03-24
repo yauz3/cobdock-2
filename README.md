@@ -19,14 +19,40 @@ conda activate cobdock_2
 pip install -r requirements.txt
 ```
 
-# Step by step files:
+# CobDock-2: Step-by-Step Pipeline
 
-1_read_SMILES_to_features.py: prepare features
+This repository contains a step-by-step pipeline for structure-based binding site prediction, feature selection, and local docking.
 
-2_train_Autogluon_rule_fit.py: train the models
+## Pipeline Overview
 
-3_performance.py: evaluate the models
+1. **cobdock_2_step_1_Fpocket_run_selected**  
+   Runs Fpocket to detect and extract selected binding pockets from protein structures.
 
+2. **cobdock_2_step_2_Prepare_Fpocket_features**  
+   Extracts physicochemical features from Fpocket output for each pocket.
+
+3. **cobdock_2_step_3_fix_pockets_selected**  
+   Fixes and filters pocket selections for consistent downstream analysis.
+
+4. **cobdock_2_step_4_Prepare_amino_acid_features**  
+   Computes amino acid-level features around selected pockets.
+
+5. **cobdock_2_step_5_Boruta_feature_selection**  
+   Applies Boruta algorithm to identify the most relevant features for classification.
+
+6. **cobdock_2_step_6_autogluon**  
+   Trains machine learning models using AutoGluon based on selected features.
+
+7. **cobdock_2_step_7_Make_prediction_binding_site_performance**  
+   Evaluates model predictions and performance metrics on test data.
+
+8. **cobdock_2_step_8_local_docking_with_PLANTS**  
+   Performs local molecular docking using the PLANTS docking software.
+
+9. **cobdock_2_step_9_RMSD_validation**  
+   Validates docking results by calculating RMSD between predicted and reference poses.
+
+# Note: For the Local docking make sure, PLANTS exist in the directory
 
 ## License
 
